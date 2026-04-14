@@ -1,0 +1,82 @@
+{% extends 'myapp/student_base.html' %}
+{% load static %}
+{% block title %}Assignment Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Assignment Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm auto-index">
+            <thead>
+
+            <tr>
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>title</th>
+                <th>remarks</th>
+                <th>Date /Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for sa_obj in sa_list %}
+            <tbody>
+            <!--#7. student_assignment - id, student_id, title, remarks, dt, tm, type_id, status-->
+            <tr>
+                <td></td>
+                <td>
+                {% for s_obj in student_list %}
+                {% if s_obj.user_id == sa_obj.student_id  %}
+                    {{ s_obj.fname}} {{ s_obj.lname}}
+                {% endif %}
+                {% endfor %}
+                </td>
+
+                <td>{{ sa_obj.title}}</td>
+                <td>{{ sa_obj.remarks}}</td>
+                <td>{{ sa_obj.dt}} / {{ sa_obj.tm}}</td>
+                <td>{{ sa_obj.status}}</td>
+                <td >
+                    <div class="btn-group">
+                        <a class="btn btn-primary"
+                           href="../student_assignment_details_view?assignment_id={{ sa_obj.id }}">Details</a>
+                    </div>
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+<style>
+  form
+  {
+    counter-reset: Serial;
+  }
+  table
+  {
+  }
+  .auto-index td:first-child:before
+  {
+    counter-increment: Serial;
+    content:counter(Serial);
+  }
+</style>
+{% endblock %}

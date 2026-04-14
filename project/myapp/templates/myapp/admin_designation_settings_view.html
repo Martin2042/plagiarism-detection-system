@@ -1,0 +1,65 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Designation Settings Details{% endblock %}
+{% block body %}
+
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+<center>
+
+    <h1>Designation Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <table class="tablecenterheadCSS table table-striped table-bordered auto-index">
+            <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Designation Name</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for ev in designation_list %}
+            <tbody>
+            <tr>
+                <td></td>
+                <td>{{ ev.designation }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-warning" href='../admin_designation_settings_edit?id={{ ev.id }}'>Edit</a>
+                        <a class="btn btn-danger" href='../admin_designation_settings_delete?id={{ ev.id }}'>Delete</a>
+                        <!--<a class="btn btn-primary" href='../?category_id={{ ev.id }}'>Sub Category</a>-->
+                    </div>
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        <br>
+             <a class="btn btn-info" href="{% url 'admin_designation_settings_add'%}">Add New</a>
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+<style>
+  form
+  {
+    counter-reset: Serial;
+  }
+  table
+  {
+  }
+  .auto-index td:first-child:before
+  {
+    counter-increment: Serial;
+    content:counter(Serial);
+  }
+</style>
+{% endblock %}

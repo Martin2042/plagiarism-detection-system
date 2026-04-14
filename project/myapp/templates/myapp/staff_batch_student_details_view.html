@@ -1,0 +1,58 @@
+{% extends 'myapp/staff_base.html' %}
+{% load static %}
+{% block title %}Student Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+
+<center>
+
+    <h1>Student Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <table class="tablecenterheadCSS table table-hover table-bordered">
+            <thead class="thead">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Roll. No.</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact</th>
+            </tr>
+            </thead>
+            {% for bl in batch_list %}
+
+            <tbody>
+            {% for cm in student_list %}
+            {% if cm.user_id == bl.student_id %}
+            <tr>
+                <td>{{ cm.id }}</td>
+                <td>{{ cm.fname }} {{ cm.lname }}</td>
+                <td>{{ cm.rollno }}</td>
+                <td>{{ cm.addr }}, {{ cm.pin }}</td>
+                <td>{{ cm.email}}</td>
+                <td>{{ cm.contact}}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            <tbody>
+            {% endfor %}
+        </table>
+
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}
+About Us
+{% endblock %}
+{% block body %}
+<center>
+    <img src="{% static './myapp/images/about-us.png' %}" width="150" height="150">
+    <div class="container">
+        <p class="text-primary">Plagiarism is presenting someone else’s work or ideas as your own, with or without their consent, by incorporating it into your work without full acknowledgement. All published and unpublished material, whether in manuscript, printed or electronic form, is covered under this definition. Plagiarism may be intentional or reckless, or unintentional. Under the regulations for examinations, intentional or reckless plagiarism is a disciplinary offence.</p>
+    </div>
+</center>
+{% endblock %}

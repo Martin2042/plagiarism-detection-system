@@ -1,0 +1,48 @@
+{% extends 'myapp/student_base.html' %}
+{% load static %}
+{% block title %}Student Details{% endblock %}
+{% block body %}
+<center>
+    <h2>Student Details</h2>
+	<div class="container">
+    <form role="form" name="frm"  method="get">
+        {% csrf_token %}
+		<div class="form-group">
+			<label for="adm_no">Roll number</label>
+	        <input type="text"  class="form-control"
+				   id="adm_no" name="rollno" value="{{student_obj.rollno}}" disabled>
+		</div>
+		<div class="form-group">
+			<label for="fname">Name</label>
+	        <input class="form-control" type="text"
+				   id="fname" name="fname" value="{{student_obj.fname}}" required="required" disabled>
+			<input class="form-control" type="text"
+				   id="lname" name="lname" value="{{student_obj.lname}}" required="required" disabled>
+		</div>
+	    <div class="form-group">
+			<label for="addr">Address</label>
+			<textarea class="form-control"
+					  id="addr" name="addr" placeholder="Address" disabled>{{student_obj.addr}}</textarea>
+            <input type="text"  class="form-control"
+				   id="pin" name="pin" value="{{student_obj.pin}}" disabled>
+		</div>
+	    <div class="form-group">
+			<label for="contact">Contact</label>
+	        <input type="text"  class="form-control"
+				   id="contact" name="contact" value="{{student_obj.contact}}" disabled>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label>
+	        <input type="email" class="form-control"
+				   id="email" name="email" value="{{student_obj.email}}" disabled></td>
+		</div>
+        <br><br>
+
+
+
+    </form>
+	{{msg}}
+	</div>
+</center>
+
+{% endblock %}

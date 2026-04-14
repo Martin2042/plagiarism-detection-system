@@ -1,0 +1,35 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}New Student Allocation{% endblock %}
+{% block body %}
+<center>
+    <h2>New Student Allocation</h2>
+	<div class="container">
+		<div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+    <form role="form" name="frm" action="{% url 'admin_batch_student_details_add' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="student_id">Student :</label>
+            <select class="form-control" id="student_id"  name="student_id">
+                {% for jm in student_list%}
+                <option value="{{jm.user_id}}">{{jm.fname}} {{jm.lname}}({{jm.status}})</option>
+                {% endfor %}
+            </select>
+        </div>
+		    <input class="form-control" type="hidden"  id="staff_id" name="staff_id" value="{{staff_id}}" required="required">
+
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">Allocate</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+	    </table>
+    </form>
+	{{msg}}
+	</div>
+			<div class="col-md-4">
+        </div>
+		</div>
+	</div>
+</center>
+{% endblock %}

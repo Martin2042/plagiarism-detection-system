@@ -1,0 +1,62 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Faculty Student Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+
+<center>
+
+    <h1>Faculty Student Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <table class="tablecenterheadCSS table table-hover table-bordered">
+            <thead class="thead">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Roll. No.</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for bl in batch_list %}
+
+            <tbody>
+            {% for cm in student_list %}
+            {% if cm.user_id == bl.student_id %}
+            <tr>
+                <td>{{ cm.id }}</td>
+                <td>{{ cm.fname }} {{ cm.lname }}</td>
+                <td>{{ cm.rollno }}</td>
+                <td>{{ cm.addr }}, {{ cm.pin }}</td>
+                <td>{{ cm.email}}</td>
+                <td>{{ cm.contact}}</td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="location.href='../admin_batch_student_details_delete?id={{ cm.id }}&staff_id={{bl.staff_id}}'">Delete</button>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            <tbody>
+            {% endfor %}
+        </table>
+
+           <button type="button" class="btn btn-info" onclick="location.href='../admin_batch_student_details_add?staff_id={{ staff_id }}'">Add Student</button></h1>
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+
+{% endblock %}

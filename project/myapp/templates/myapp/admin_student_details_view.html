@@ -1,0 +1,80 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Student Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Student Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm auto-index">
+            <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Gender</th>
+                <th>DOB</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for student_obj in student_list %}
+            <tbody>
+            <tr>
+                <td></td>
+                <td>{{ student_obj.fname }} {{ student_obj.lname }}</td>
+                <td>{{ student_obj.rollno}}</td>
+                <td>{{ student_obj.gender}}</td>
+                <td>{{ student_obj.dob}}</td>
+                <td>{{ student_obj.addr}}, {{ student_obj.pin}}</td>
+                <td>{{ student_obj.email}}</td>
+                <td>{{ student_obj.contact}}</td>
+                <td >
+                    <div class="btn-group">
+                        <a class="btn btn-warning"
+                           href="../admin_student_details_edit?id={{ student_obj.id }}">Edit</a>
+                        <a class="btn btn-danger"
+                           href="../admin_student_details_delete?id={{ student_obj.id }}">Delete</a>
+
+                    </div>
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+<style>
+  form
+  {
+    counter-reset: Serial;
+  }
+  table
+  {
+  }
+  .auto-index td:first-child:before
+  {
+    counter-increment: Serial;
+    content:counter(Serial);
+  }
+</style>
+{% endblock %}

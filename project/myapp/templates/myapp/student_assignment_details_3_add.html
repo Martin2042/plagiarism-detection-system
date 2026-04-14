@@ -1,0 +1,38 @@
+{% extends 'myapp/student_base.html' %}
+{% load static %}
+{% block title %}Submit Assignment{% endblock %}
+{% block body %}
+
+<center>
+    <h2><font color="#366092">Submit Assignment</font></h2>
+<div class="container">
+    <form name="frm" action="{% url 'student_assignment_details_3_add' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="form-group">
+                <label for="title">Title</label>
+                <input class="form-control" type="text" id="title" name="title" placeholder="title">
+        </div>
+
+        <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <textarea class="form-control" id="remarks" name="remarks" placeholder="remarks"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="content">content</label>
+            <textarea class="form-control" id="content" name="content" placeholder="content"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="links_content">links_content</label>
+            <textarea class="form-control" id="links_content" name="links_content" placeholder="links_content"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Reset</button>
+        {{msg}}
+
+
+    </form>
+</div>
+</center>
+{% endblock %}

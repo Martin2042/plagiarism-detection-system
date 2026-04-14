@@ -1,0 +1,84 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Staff Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Staff Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm auto-index">
+            <thead>
+            <tr>
+                <th>Sl.No</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for staff_obj in staff_list %}
+            <tbody>
+            <tr>
+                <td></td>
+                <td>{{ staff_obj.fname }} {{ staff_obj.lname }}</td>
+                <td>
+                {% for designation_obj in designation_list %}
+                {% if staff_obj.desg_id == designation_obj.id  %}
+                    {{ designation_obj.designation}}
+                {% endif %}
+                {% endfor %}
+                </td>
+                <td>{{ staff_obj.addr}}, {{ staff_obj.pin}}</td>
+                <td>{{ staff_obj.email}}</td>
+                <td>{{ staff_obj.contact}}</td>
+                <td >
+
+                    <div class="btn-group">
+                        <a class="btn btn-primary"
+                           href="../admin_batch_student_details_view?staff_id={{ staff_obj.id }}">Students</a>
+                        <a class="btn btn-danger"
+                           href="../admin_staff_details_delete?id={{ staff_obj.id }}">Delete</a>
+                        <a class="btn btn-warning"
+                           href="../admin_staff_details_edit?id={{ staff_obj.id }}">Edit</a>
+                    </div>
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+<style>
+  form
+  {
+    counter-reset: Serial;
+  }
+  table
+  {
+  }
+  .auto-index td:first-child:before
+  {
+    counter-increment: Serial;
+    content:counter(Serial);
+  }
+</style>
+{% endblock %}

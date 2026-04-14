@@ -1,0 +1,21 @@
+Tables
+
+1. user_login - id, uname, passwd, utype
+
+2. designation_type - id, designation
+
+3. staff_details - id, user_id, desg_id, fname, lname, addr, pin, email, contact, status
+
+4. student_details -  id, user_id, rollno, fname, lname, dob, gender, addr, pin, email, contact, status
+
+5. staff_student_map - id, staff_id, student_id
+
+6. staff_messages - id, staff_id, sub, msg, dt, tm, status
+
+7. student_assignment - id, student_id, title, remarks, dt, tm, type_id, status
+
+8. assignment_details_1 - id, assignment_id, file, analysis_score, status
+
+9. assignment_details_2 - id, assignment_id, file, links, analysis_score, status
+
+10. assignment_details_3 - id, assignment_id, content, links_content, analysis_score, status

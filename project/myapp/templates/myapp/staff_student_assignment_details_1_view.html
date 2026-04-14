@@ -1,0 +1,75 @@
+{% extends 'myapp/staff_base.html' %}
+{% load static %}
+{% block title %}Assignment Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+
+<center>
+
+    <h1>Assignment Details</h1>
+    <div class="container">
+    <form role="form" name="frm" action="" method="post">
+        {% csrf_token %}
+
+        <div class="table-responsive-lg">
+        <table class="tablecenterheadCSS table table-hover table-bordered table-sm auto-index">
+            <thead>
+
+            <tr>
+                <th>Sl.No</th>
+                <th>Analysis Score</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for ad1_obj in ad1_list %}
+            <tbody>
+            <!--#8. assignment_details_1 - id, assignment_id, file, analysis_score, status-->
+            <tr>
+                <td></td>
+
+                <td>{{ ad1_obj.analysis_score}}</td>
+                <td>{{ ad1_obj.status}}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary"
+                           href="../static/myapp/media/{{ ad1_obj.file }}">Download</a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-warning"
+                           href="../staff_student_assignment_analysis?assignment_id={{ ad1_obj.assignment_id }}">Analyse</a>
+
+                    </div>
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+        </div>
+
+    </form>
+    </div>
+    <b>{{msg}}</b>
+</center>
+<style>
+  form
+  {
+    counter-reset: Serial;
+  }
+  table
+  {
+  }
+  .auto-index td:first-child:before
+  {
+    counter-increment: Serial;
+    content:counter(Serial);
+  }
+</style>
+{% endblock %}
